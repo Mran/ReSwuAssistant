@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3989f9</color>
+    <color name="colorPrimaryDark">#2c80f5</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="v_bottom_bg">#ffffff</color>
+    <color name="schedule_day_date_bg">#ffffff</color>
+    <color name="class_divie_line_color">#ff333333</color>
+    <color name="textcolor">#ff000000</color>
+</resources>

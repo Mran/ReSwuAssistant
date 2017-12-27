@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/v_bottom_bg"
+    android:orientation="horizontal"
+    android:weightSum="4">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/bottom_icon_schedule"
+            android:layout_width="@dimen/v_bottom_i_h"
+            android:layout_height="@dimen/v_bottom_i_h"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_schedule" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/bottom_icon_grade"
+            android:layout_width="@dimen/v_bottom_i_h"
+            android:layout_height="@dimen/v_bottom_i_h"
+            android:layout_gravity="center"
+
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_grade" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/bottom_icon_lib"
+            android:layout_width="@dimen/v_bottom_i_h"
+            android:layout_height="@dimen/v_bottom_i_h"
+            android:layout_gravity="center"
+
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_library" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/bottom_icon_mine"
+            android:layout_width="@dimen/v_bottom_i_h"
+            android:layout_height="@dimen/v_bottom_i_h"
+
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_mine" />
+    </FrameLayout>
+</LinearLayout>
