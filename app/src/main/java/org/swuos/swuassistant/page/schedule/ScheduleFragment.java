@@ -1,5 +1,6 @@
 package org.swuos.swuassistant.page.schedule;
 
+import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -28,11 +29,13 @@ import android.widget.TextView;
 import org.swuos.swuassistant.R;
 import org.swuos.swuassistant.commmon.CommoneUtil;
 import org.swuos.swuassistant.commmon.Constant;
+import org.swuos.swuassistant.commmon.Logger;
 import org.swuos.swuassistant.commmon.RenderScriptGaussianBlur;
 import org.swuos.swuassistant.commmon.TotalInfos;
 import org.swuos.swuassistant.page.BaseFragment;
 import org.swuos.swuassistant.page.schedule.model.ScheduleData;
 import org.swuos.swuassistant.page.schedule.model.ScheduleItem;
+import org.swuos.swuassistant.weight.ObservableScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,9 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
     TextView mSchedule_weeksTextView;//学周
     TextView mSchedule_yearsTextView;//学年
     View mRootView;
-    ScrollView mScrollView;
+    LinearLayout mTopTimeLinearLayout;//包裹着顶部的学年学期的部分
+    LinearLayout mWeekDaysLinearLayout;
+    ObservableScrollView mScrollView;
     TextView d1TextView;
     SchedulePresenterCompl mSchedulePresenterCompl;
     ContainerLinearLayout mContainerLinearLayout;
@@ -61,6 +66,8 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
     private FrameLayout mChooseWeeksFrameLayout;
     private RenderScriptGaussianBlur mRenderScriptGaussianBlur;
     float mLastY;
+    AnimatorSet mGoTopAnimationSet;
+    private AnimatorSet mGoBackAnimationSet;
 
     public class ContainerLinearLayout extends FrameLayout {
 
@@ -156,6 +163,8 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
 
     @Override
     protected void bindView() {
+        mTopTimeLinearLayout = mRootView.findViewById(R.id.schedule_table_top);
+        mWeekDaysLinearLayout = mRootView.findViewById(R.id.week_days);
         mScrollView = mRootView.findViewById(R.id.schedule_table_ScrollView);
         mFrameLayout = mRootView.findViewById(R.id.class_table);
         mZ1TextView = mRootView.findViewById(R.id.z1);
@@ -181,7 +190,26 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
         mSchedule_yearsTextView = mRootView.findViewById(R.id.schedule_years);
         d1TextView = mRootView.findViewById(R.id.d1);
         mRootView.setBackgroundResource(R.mipmap.bg);
+        mGoTopAnimationSet = new AnimatorSet();
+        mGoBackAnimationSet = new AnimatorSet();
 
+        mScrollView.setScrollViewListener(new ObservableScrollView.ScrollViewListener() {
+            @Override
+            public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+                Logger.d("ScheduleFragment", "onScrollChanged: y=" + y + "oldY=" + oldy);
+                if (y <= CommoneUtil.dp2px(getActivity(), 50)) {
+
+                    RelativeLayout.LayoutParams layoutParams= (RelativeLayout.LayoutParams) mTopTimeLinearLayout.getLayoutParams();
+                    layoutParams.topMargin=-y;
+                    mTopTimeLinearLayout.setLayoutParams(layoutParams);
+                    Logger.d("ScheduleFragment", "onScrollChanged: topstart");
+                }else {
+                    RelativeLayout.LayoutParams layoutParams= (RelativeLayout.LayoutParams) mTopTimeLinearLayout.getLayoutParams();
+                    layoutParams.topMargin=-CommoneUtil.dp2px(getActivity(), 50);
+                    mTopTimeLinearLayout.setLayoutParams(layoutParams);
+                }
+            }
+        });
         mSchedule_weeksTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -409,4 +437,6 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
         }
         return super.onBackPressed();
     }
+
+
 }

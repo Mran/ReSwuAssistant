@@ -1,66 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <View
+        android:id="@+id/status_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="25dp"
+        android:background="@color/colorPrimaryDark"
+        android:translationZ="1dp" />
 
+    <LinearLayout
+        android:id="@+id/schedule_table_top"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:layout_below="@id/status_bar"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/schedule_weeks"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:drawableRight="@drawable/schedule_week_more"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="第 6 周"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="@color/colorPrimaryDark" />
-
+        <TextView
+            android:id="@+id/schedule_years"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="大三 第2学期"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
         <LinearLayout
+            android:id="@+id/week_days"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center_horizontal"
+            android:layout_height="36dp"
+            android:layout_below="@id/schedule_table_top"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/schedule_weeks"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawableRight="@drawable/schedule_week_more"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="第 6 周"
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/schedule_years"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="大三 第2学期"
-                android:textColor="#ffffff"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
 
             <LinearLayout
                 android:id="@+id/day"
-                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center">
+                android:layout_height="20dp"
+                android:layout_gravity="top|center"
+                android:background="@color/colorPrimary">
 
                 <TextView
                     android:id="@+id/z0"
@@ -136,9 +132,9 @@
 
             <LinearLayout
                 android:id="@+id/date"
-                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="16dp"
+                android:background="@color/colorPrimary">
 
                 <TextView
                     android:id="@+id/d0"
@@ -224,247 +220,169 @@
 
 
             </LinearLayout>
-
-            <ScrollView
-                android:clipToPadding="false"
-                android:paddingBottom="@dimen/v_bottom_i_h"
-                android:id="@+id/schedule_table_ScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:id="@+id/classs"
-                        android:layout_width="@dimen/table_width"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/classs1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-                            android:gravity="fill"
-                            android:text="1"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-                            android:gravity="fill"
-                            android:text="2"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="3"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="4"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="5"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="6"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="7"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="8"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="9"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="10"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="11"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-
-                            android:gravity="fill"
-                            android:text="12"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-                            android:gravity="fill"
-                            android:text="13"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/each_class_hight"
-                            android:layout_gravity="center"
-                            android:gravity="fill"
-                            android:text="14"
-                            android:textColor="@color/schedule_day_date_bg" />
-
-                    </LinearLayout>
-
-                    <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent">-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color"/>-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-
-                    <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginTop="@dimen/each_class_hight"-->
-                    <!--android:background="@color/class_divie_line_color" />-->
-                    <!--</LinearLayout>-->
-
-                    <FrameLayout
-                        android:id="@+id/class_table"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/table_width"
-                        android:layout_toRightOf="@+id/classs">
-
-                    </FrameLayout>
-                </FrameLayout>
-            </ScrollView>
-
         </LinearLayout>
-
     </LinearLayout>
-</FrameLayout>
+
+
+
+
+    <org.swuos.swuassistant.weight.ObservableScrollView
+        android:id="@+id/schedule_table_ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/v_bottom_i_h"
+        android:paddingTop="111dp"
+
+        android:scrollbars="none"
+        android:translationZ="-1dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/classs"
+                android:layout_width="@dimen/table_width"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/classs1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+                    android:gravity="fill"
+                    android:text="1"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+                    android:gravity="fill"
+                    android:text="2"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="3"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="4"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="5"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="6"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="7"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="8"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="9"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="10"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="11"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+
+                    android:gravity="fill"
+                    android:text="12"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+                    android:gravity="fill"
+                    android:text="13"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/each_class_hight"
+                    android:layout_gravity="center"
+                    android:gravity="fill"
+                    android:text="14"
+                    android:textColor="@color/schedule_day_date_bg" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/class_table"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/table_width"
+                android:layout_toRightOf="@+id/classs">
+
+            </FrameLayout>
+        </FrameLayout>
+    </org.swuos.swuassistant.weight.ObservableScrollView>
+
+
+</RelativeLayout>
