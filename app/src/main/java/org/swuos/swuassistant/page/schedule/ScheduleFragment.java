@@ -1,6 +1,7 @@
 package org.swuos.swuassistant.page.schedule;
 
 import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -58,7 +59,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
     ContainerLinearLayout mContainerLinearLayout;
     private List<TextView> textViewList;
     private FrameLayout mFrameLayout;
-    private int showWeek;
+    private int showWeek = 1;
     private TotalInfos totalInfo;
     private TextView mZ1TextView;
     int mClazzWidth;//一节课的宽度
@@ -66,6 +67,8 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
     private FrameLayout mChooseWeeksFrameLayout;
     private RenderScriptGaussianBlur mRenderScriptGaussianBlur;
     float mLastY;
+    long mLastActionDown;
+
     AnimatorSet mGoTopAnimationSet;
     private AnimatorSet mGoBackAnimationSet;
 
@@ -133,12 +136,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
 
         @Override
         public boolean dispatchTouchEvent(MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                if (mChooseWeeksFrameLayout != null && mChooseWeeksFrameLayout.getParent() != null) {
-                mContainerLinearLayout.removeView(mChooseWeeksFrameLayout);
-//                    return true;
-//                }
-            }
+
             return super.dispatchTouchEvent(event);
         }
 
@@ -199,13 +197,13 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
                 Logger.d("ScheduleFragment", "onScrollChanged: y=" + y + "oldY=" + oldy);
                 if (y <= CommoneUtil.dp2px(getActivity(), 50)) {
 
-                    RelativeLayout.LayoutParams layoutParams= (RelativeLayout.LayoutParams) mTopTimeLinearLayout.getLayoutParams();
-                    layoutParams.topMargin=-y;
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mTopTimeLinearLayout.getLayoutParams();
+                    layoutParams.topMargin = -y;
                     mTopTimeLinearLayout.setLayoutParams(layoutParams);
                     Logger.d("ScheduleFragment", "onScrollChanged: topstart");
-                }else {
-                    RelativeLayout.LayoutParams layoutParams= (RelativeLayout.LayoutParams) mTopTimeLinearLayout.getLayoutParams();
-                    layoutParams.topMargin=-CommoneUtil.dp2px(getActivity(), 50);
+                } else {
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mTopTimeLinearLayout.getLayoutParams();
+                    layoutParams.topMargin = -CommoneUtil.dp2px(getActivity(), 50);
                     mTopTimeLinearLayout.setLayoutParams(layoutParams);
                 }
             }
@@ -214,7 +212,6 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
             @Override
             public void onClick(View v) {
                 initWeeksPopuWindow();
-                update();
             }
         });
         super.bindView();
@@ -251,8 +248,16 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
 
 
         if (mChooseWeeksFrameLayout != null) {
-            mChooseWeeksFrameLayout.setBackground(new BitmapDrawable(getResources(), mRenderScriptGaussianBlur.gaussianBlur(15, CommoneUtil.convertViewToBitmap(mRootView))));
-            ((ViewGroup) (getActivity().getWindow().getDecorView().getRootView())).addView(mChooseWeeksFrameLayout);
+            mContainerLinearLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    mChooseWeeksFrameLayout.setBackground(new BitmapDrawable(getResources(), mRenderScriptGaussianBlur.gaussianBlur(15, CommoneUtil.convertViewToBitmap(mRootView))));
+                    mChooseWeeksFrameLayout.setAlpha(0);
+                    ((ViewGroup) (getActivity().getWindow().getDecorView().getRootView())).addView(mChooseWeeksFrameLayout);
+                    mChooseWeeksFrameLayout.animate().alpha(1).setDuration(100).start();
+
+                }
+            });
 
             return;
         }
@@ -267,13 +272,12 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
         linearLayout.setLayoutParams(new ScrollView.LayoutParams((int) (mContainerLinearLayout.getWidth() * 0.6), mContainerLinearLayout.getHeight() / 2, Gravity.CENTER));
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         for (int i = 0; i < 20; i++) {
-            TextView textView = new TextView(getActivity());
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            final TextView textView = new TextView(getActivity());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(layoutParams);
             textView.setGravity(Gravity.CENTER);
             int[][] states = new int[][]{
                     new int[]{android.R.attr.state_enabled}, // enabled
-
             };
 
             int[] colors = new int[]{
@@ -286,23 +290,37 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
             textView.setPadding(0, 10, 0, 0);
             textView.setText("第 " + (i + 1) + " 周");
             textView.setLetterSpacing(0.3f);
-            textView.setTextSize(20);
-            textView.setTextColor(0xffffffff);
+            if (i + 1 == showWeek) {
+                textView.setTextSize(20.0f);
+                textView.setTextColor(0xff000000);
+
+            } else {
+                textView.setTextSize(18.0f);
+                textView.setTextColor(0xffffffff);
+
+
+            }
             textView.setTag(i + 1);
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    TextView lastChooseWeek = (TextView) linearLayout.getChildAt(showWeek - 1);
+                    ObjectAnimator.ofFloat(lastChooseWeek, "TextSize", 20.0f, 18.0f).setDuration(100).start();
+                    lastChooseWeek.setTextColor(0xffffffff);
+                    ((TextView) v).setTextColor(0xff000000);
+                    ObjectAnimator.ofFloat((TextView) v, "TextSize", 18.0f, 20.0f).setDuration(100).start();
+
                     showWeek = (int) v.getTag();
                     mSchedule_weeksTextView.setText("第" + v.getTag() + "周");
-                    update();
+                    showResult();
                     mContainerLinearLayout.post(new Runnable() {
                         @Override
                         public void run() {
-                            mChooseWeeksFrameLayout.setBackground(new BitmapDrawable(getResources(), mRenderScriptGaussianBlur.gaussianBlur(15, CommoneUtil.convertViewToBitmap(mContainerLinearLayout))));
-
+                            mChooseWeeksFrameLayout.setBackground(new BitmapDrawable(getResources(), mRenderScriptGaussianBlur.gaussianBlur(10, CommoneUtil.convertViewToBitmap(mContainerLinearLayout))));
                         }
                     });
+
 
                 }
             });
@@ -313,19 +331,30 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mChooseWeeksFrameLayout.animate().alpha(0.0f).setDuration(100).start();
-
                     mLastY = event.getY();
-                    return false;
+                    mLastActionDown = System.currentTimeMillis();
+                    return true;
                 }
                 if (event.getAction() == MotionEvent.ACTION_MOVE) {
                     mScrollView.smoothScrollBy(0, (int) (-event.getY() + mLastY));
                     mLastY = event.getY();
+                    return true;
                 }
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    mChooseWeeksFrameLayout.setBackground(new BitmapDrawable(getResources(), mRenderScriptGaussianBlur.gaussianBlur(15, CommoneUtil.convertViewToBitmap(mContainerLinearLayout))));
-                    mChooseWeeksFrameLayout.animate().alpha(1).setDuration(100).start();
-//                    mChooseWeeksFrameLayout.setAlpha(1f);
-                    return false;
+                    if (System.currentTimeMillis() - mLastActionDown < 100) {
+                        mRootView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((ViewGroup) (getActivity().getWindow().getDecorView().getRootView())).removeView(mChooseWeeksFrameLayout);
+
+                            }
+                        });
+
+                    } else {
+                        mChooseWeeksFrameLayout.setBackground(new BitmapDrawable(getResources(), mRenderScriptGaussianBlur.gaussianBlur(10, CommoneUtil.convertViewToBitmap(mContainerLinearLayout))));
+                        mChooseWeeksFrameLayout.animate().alpha(1).setDuration(100).start();
+                    }
+                    return true;
                 }
                 return false;
             }
@@ -431,8 +460,10 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView {
 
     @Override
     public boolean onBackPressed() {
-        if (mChooseWeeksFrameLayout.getParent() != null) {
+        if (mChooseWeeksFrameLayout != null && mChooseWeeksFrameLayout.getParent() != null) {
+
             ((ViewGroup) (getActivity().getWindow().getDecorView().getRootView())).removeView(mChooseWeeksFrameLayout);
+
             return true;
         }
         return super.onBackPressed();
