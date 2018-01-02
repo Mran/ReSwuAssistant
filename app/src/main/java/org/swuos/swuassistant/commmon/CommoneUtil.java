@@ -19,17 +19,17 @@ public class CommoneUtil {
 
     public static boolean isLogin(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.sharePreferencesName), Context.MODE_PRIVATE);
-        return TextUtils.isEmpty(sharedPreferences.getString("userName", null));
+        return !TextUtils.isEmpty(sharedPreferences.getString("userName", null));
 
     }
 
     public static void initTotalInfo(Context context, TotalInfos totalInfos) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.sharePreferencesName), Context.MODE_PRIVATE);
-        totalInfos.setUserName(sharedPreferences.getString("userName", ""));
-        totalInfos.setName(sharedPreferences.getString("name", ""));
-        totalInfos.setPassword(sharedPreferences.getString("password", ""));
+        totalInfos.setUserName(sharedPreferences.getString("userName", null));
+        totalInfos.setName(sharedPreferences.getString("name", null ));
+        totalInfos.setPassword(sharedPreferences.getString("password", null ));
         totalInfos.setSwuID(sharedPreferences.getString("swuID", ""));
-        totalInfos.setScheduleDataJson(sharedPreferences.getString("scheduleDataJson", ""));
+        totalInfos.setScheduleDataJson(sharedPreferences.getString("scheduleDataJson", null));
     }
 
     public CommoneUtil() {

@@ -20,9 +20,9 @@ public class RenderScriptGaussianBlur {
         this.mRenderScript = RenderScript.create(context);
     }
 
-    public Bitmap gaussianBlur(int radius, Bitmap bitmap) {
+    public Bitmap gaussianBlur(Bitmap bitmap) {
 
-        float scaleFactor = 10;
+        float scaleFactor = 8;
 
         Bitmap overlay = Bitmap.createBitmap((int)(bitmap.getWidth()/scaleFactor), (int)(bitmap.getHeight()/scaleFactor), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(overlay);

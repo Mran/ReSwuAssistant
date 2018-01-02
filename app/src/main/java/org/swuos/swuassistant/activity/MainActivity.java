@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.a_home);
         bindView();
         initData();
+
     }
 
     public void bindView() {
@@ -44,22 +45,22 @@ public class MainActivity extends BaseActivity {
                 transFragment(i);
             }
         });
-    }
-
-    @Override
-    public void initData() {
-        super.initData();
-        if (CommoneUtil.isLogin(this)) {
-            startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), REQUEST_CODE);
-        }
-        CommoneUtil.initTotalInfo(this, TotalInfos.getInstance());
         mFragmentList = new ArrayMap<>();
         mFragmentList.put(tags[0], new ScheduleFragment());
         mFragmentList.put(tags[1], new ScheduleFragment());
         mFragmentList.put(tags[2], new ScheduleFragment());
         mFragmentList.put(tags[3], new ScheduleFragment());
         mBottomBar.setSelectedItem(0);
-        transFragment(0);
+    }
+
+    @Override
+    public void initData() {
+        if (!CommoneUtil.isLogin(this)) {
+            startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), REQUEST_CODE);
+        } else {
+            CommoneUtil.initTotalInfo(this, TotalInfos.getInstance());
+            transFragment(0);
+        }
     }
 
     @Override
