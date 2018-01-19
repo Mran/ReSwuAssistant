@@ -1,4 +1,4 @@
-package org.swuos.swuassistant.activity;
+package org.swuos.swuassistant.app;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,13 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
-import org.swuos.swuassistant.commmon.Logger;
+import org.swuos.swuassistant.utils.Logger;
 
 /**
  * Created by mran on 17-12-10.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

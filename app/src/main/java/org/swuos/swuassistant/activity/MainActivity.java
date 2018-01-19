@@ -8,9 +8,10 @@ import android.util.ArrayMap;
 
 import org.swuos.swuassistant.R;
 import org.swuos.swuassistant.activity.login.LoginActivity;
+import org.swuos.swuassistant.app.BaseActivity;
 import org.swuos.swuassistant.commmon.CommoneUtil;
 import org.swuos.swuassistant.commmon.Constant;
-import org.swuos.swuassistant.commmon.Logger;
+import org.swuos.swuassistant.utils.Logger;
 import org.swuos.swuassistant.commmon.TotalInfos;
 import org.swuos.swuassistant.page.BaseFragment;
 import org.swuos.swuassistant.page.schedule.ScheduleFragment;

@@ -2,7 +2,7 @@ package org.swuos.swuassistant.net.api;
 
 
 import org.swuos.swuassistant.commmon.Constant;
-import org.swuos.swuassistant.commmon.Logger;
+import org.swuos.swuassistant.utils.Logger;
 import org.swuos.swuassistant.net.interfacelmpl.JwGrade;
 import org.swuos.swuassistant.net.interfacelmpl.JwGradeDetail;
 import org.swuos.swuassistant.net.interfacelmpl.JwJudgement;

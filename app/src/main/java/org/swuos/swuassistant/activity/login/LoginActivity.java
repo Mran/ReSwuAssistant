@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import org.swuos.swuassistant.R;
-import org.swuos.swuassistant.activity.BaseActivity;
+import org.swuos.swuassistant.app.BaseActivity;
 import org.swuos.swuassistant.activity.login.presenter.LoginPresenterComp;
 import org.swuos.swuassistant.activity.login.view.ILoginView;
 import org.swuos.swuassistant.commmon.Constant;

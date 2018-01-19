@@ -7,7 +7,7 @@ import android.util.Base64;
 import com.google.gson.Gson;
 
 import org.swuos.swuassistant.commmon.Constant;
-import org.swuos.swuassistant.commmon.Logger;
+import org.swuos.swuassistant.utils.Logger;
 import org.swuos.swuassistant.commmon.TotalInfos;
 import org.swuos.swuassistant.net.api.SwuJwApi;
 import org.swuos.swuassistant.net.jsona.LoginJson;
