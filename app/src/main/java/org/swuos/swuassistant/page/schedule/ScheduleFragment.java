@@ -33,7 +33,7 @@ import android.widget.TextView;
 import org.swuos.swuassistant.R;
 import org.swuos.swuassistant.commmon.CommoneUtil;
 import org.swuos.swuassistant.commmon.Constant;
-import org.swuos.swuassistant.commmon.Logger;
+import org.swuos.swuassistant.utils.Logger;
 import org.swuos.swuassistant.commmon.RenderScriptGaussianBlur;
 import org.swuos.swuassistant.commmon.TotalInfos;
 import org.swuos.swuassistant.page.BaseFragment;

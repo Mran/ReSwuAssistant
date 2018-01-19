@@ -7,7 +7,7 @@ import android.util.Base64;
 import org.swuos.swuassistant.R;
 import org.swuos.swuassistant.activity.login.view.ILoginView;
 import org.swuos.swuassistant.commmon.Constant;
-import org.swuos.swuassistant.commmon.Logger;
+import org.swuos.swuassistant.utils.Logger;
 import org.swuos.swuassistant.net.api.SwuJwApi;
 import org.swuos.swuassistant.net.jsona.LoginJson;
 import org.swuos.swuassistant.net.util.RSAUtil;

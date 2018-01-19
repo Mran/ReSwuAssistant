@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.swuos.swuassistant">
-<uses-permission android:name="android.permission.INTERNET"/>
+          package="org.swuos.swuassistant">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,10 +15,15 @@
             android:name=".activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.login.LoginActivity"></activity>
+        <activity
+            android:name=".activity.login.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".app.exception.ExceptionActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import org.swuos.swuassistant.R;
-import org.swuos.swuassistant.commmon.Logger;
+import org.swuos.swuassistant.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

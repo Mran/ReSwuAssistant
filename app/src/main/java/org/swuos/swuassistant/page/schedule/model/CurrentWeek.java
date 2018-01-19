@@ -1,7 +1,7 @@
 package org.swuos.swuassistant.page.schedule.model;
 
 
-import org.swuos.swuassistant.App;
+import org.swuos.swuassistant.app.App;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ public class CurrentWeek {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         Date smdate = null;
         String openStudyDate;
-        openStudyDate = App.getmContext().getSharedPreferences("com.swuos.swuassistant_preferences", MODE_PRIVATE).getString("open_study_date", "20170227");
+        openStudyDate = App.getInstance().getSharedPreferences("com.swuos.swuassistant_preferences", MODE_PRIVATE).getString("open_study_date", "20170227");
         try {
             smdate = sdf.parse(openStudyDate);
         } catch (ParseException e) {
